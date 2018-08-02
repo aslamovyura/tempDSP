@@ -43,7 +43,7 @@ Picture 1.1. - Writing format in config.xml of settings **\<sensor/>**
 
 Table 1.1. - **\<generalSettings/>** structure
 
-| Name of the element      | Description                                                                                                                                                                                    |
+| Name of the element      | <td colspan=1>Description                                                                                                                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **\<taskGroup/>**                  | Reference element for a task of the type `taskGroup`                                                                                                                          |
 | **\<sftpSync/>**      | Reference element for a task of the type `sftpSync` |
