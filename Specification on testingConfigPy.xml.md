@@ -61,7 +61,7 @@ Table 1.1. - **\<generalSettings/>** structure
 | &nbsp;&nbsp;*path* |                                               |
 | **\<commonInputData2_Path/>**, | Source of default Framework's input data                                              |
 | &nbsp;&nbsp;*name* |                                               |
-| &nbsp;&nbsp;<a name="def3">*path*</a> |                                               |
+| &nbsp;&nbsp;#<a name="def3">*path*</a> |                                               |
 | **\<commonInputData3_Path/>**, | Source of default Framework's input history data                                              |
 | &nbsp;&nbsp;*name* |                                               |
 | &nbsp;&nbsp;<a name="def3">*path*</a> |                                               |
