@@ -16,9 +16,9 @@ testingConfigPy.xml file format
 &nbsp;&nbsp;&nbsp;&nbsp;[3.2. sftpSync](#sftpSync)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.3. keyPhrase](#keyPhrase)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.4. objectExist](#objectExist)  
-&nbsp;&nbsp;&nbsp;&nbsp;[3.5. dataMatch](#dataMatch)
-&nbsp;&nbsp;&nbsp;&nbsp;[3.6. creationHistory](#creationHistory)
-&nbsp;&nbsp;&nbsp;&nbsp;[3.7. generateTests](#generateTests)  
+&nbsp;&nbsp;&nbsp;&nbsp;[3.5. dataMatch](#dataMatch)  
+&nbsp;&nbsp;&nbsp;&nbsp;[3.6. creationHistory](#creationHistory)  
+&nbsp;&nbsp;&nbsp;&nbsp;[3.7. generateTests](#generateTests)    
 ___
 testingConfigPy.xml stores serialized tasks entities as well as common configuration settings. The specification contains a brief information about the testingConfigPy.xml structure and parameters for customizing individual tasks.
 
@@ -26,9 +26,9 @@ Table 1. - A brief testingConfigPy.xml structure
 
 | Name of the field        | Description                                                                                                                   |
 |--------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| **\<generalSettings/>**  | intended for storing common configurations settings of the tasks: common paths, switching on/off output of certain data, etc. |
-| **\<taskGroups/>**       | intended for listing tasks to be executed as well as defining their order of execution.                                                |
-| **\<task1/>...<taskN/>** | every element might be either a single task or a task group with arbitrary number of nesting level                            | 
+| **\<generalSettings/>**  | Intended for storing common configurations settings of the tasks: common paths, switching on/off output of certain data, etc. |
+| **\<taskGroups/>**       | Intended for listing tasks to be executed as well as defining their order of execution.                                                |
+| **\<task1/>...\<taskN/>** | Every element might be either a single task or a task group with arbitrary number of nesting level                            | 
 
 &nbsp;
 
@@ -43,7 +43,7 @@ Picture 1.1. - Writing format in config.xml of settings **\<sensor/>**
 
 Table 1.1. - **\<generalSettings/>** structure
 
-| Name of the element      | <td colspan=1>Description                                                                                                                                                                                    |
+| Name of the element      | Description                                                                                                                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **\<taskGroup/>**                  | Reference element for a task of the type `taskGroup`                                                                                                                          |
 | **\<sftpSync/>**      | Reference element for a task of the type `sftpSync` |
@@ -55,20 +55,20 @@ Table 1.1. - **\<generalSettings/>** structure
 | **\<defaultBehaviour/>**         | ??? |
 | **\<testingReport/>**           | Configures report generation properties  |
 | &nbsp;&nbsp;*shortLogEnable*           | On/off saving testing messages to the testing report  |
-| **\<testsInputPath/>** | <td rowspan=2> Specifies functional test's input folder                                                   |
-| &nbsp;&nbsp;*inPath* |   |
-| **\<rawdataInFold/>** | <td rowspan=2> Required name of raw data directory in the input path. It will be created in testing object input path and all wav files will be copied in specified folder.                  |
-| &nbsp;&nbsp;*path* |                                               |
-| **\<commonInputData2_Path/>**, | Source of default Framework's input data                                              |
-| &nbsp;&nbsp;*name* |                                               |
-| &nbsp;&nbsp;#<a name="def3">*path*</a> |                                               |
-| **\<commonInputData3_Path/>**, | Source of default Framework's input history data                                              |
+| **\<testsInputPath/>** |                                                    |
+| &nbsp;&nbsp;*inPath* | Specifies functional test's input folder. |
+| **\<rawdataInFold/>** |                   |
+| &nbsp;&nbsp;*path* | Required name of raw data directory in the input path. It will be created in testing object input path and all wav files will be copied in specified folder. |
+| **\<commonInputData2_Path/>** |  |
+| &nbsp;&nbsp;*name* |  |
+| &nbsp;&nbsp;<a name="def3">*path*</a> | Source of default Framework's input data |
+| **\<commonInputData3_Path/>** | Source of default Framework's input history data                                              |
 | &nbsp;&nbsp;*name* |                                               |
 | &nbsp;&nbsp;<a name="def3">*path*</a> |                                               |
-| **\<standardConfig_Path/>** | <td rowspan=2>Relative path to the Framework's standard config file |
-| &nbsp;&nbsp;*path* |                                               |
-| **\<standardInformativeTags_Path/>** | <td rowspan=2>Relative path to the standard informative tags file |
-| &nbsp;&nbsp;*path* |         |
+| **\<standardConfig_Path/>** |  |
+| &nbsp;&nbsp;*path* | Relative path to the Framework's standard config file. |
+| **\<standardInformativeTags_Path/>** |  |
+| &nbsp;&nbsp;*path* | Relative path to the standard informative tags file. |
 | **\<taskGroups/>**         | Specifies specific behaviour of tasks with certain statuses |
 | &nbsp;&nbsp;*runUnlistedTasks* | If *runUnlistedTasks*="`1`" then tasks which are not presented in **\<taskGroups/>** are treated like regular tasks (like if they were in taskGroups) |
 | &nbsp;&nbsp;*showUnlistedTasks* | If *showUnlistedTasks*="`1`" then tasks which are not presented in **\<taskGroups/>** are included in test report with status defined in *unlistedTasksStatus* |
@@ -142,29 +142,29 @@ Table 3.3. - possible commands of *copyIn* and *copyOut*
 
 | Name of the field | Description                                                          |
 |-------------------|----------------------------------------------------------------------|
-| `none` or `` | Do nothing |
-| `0` or `clri` | Empty classifier's 'In' folder |
-| `1` or `spc1` | Copies contents of folder specified in [*inPath*](#inPath) into classifier's 'In' folder |
-| `2` or `seqh` |  |
-| `def1` | ????? |
-| `def2` | Copies contents of ['def2'](#def2) folder into classifier's 'In' folder. |
-| `def3` | Copies contents of ['def3'](#def3) folder into classifier's 'In' folder. |
-| `delw` | Deletes \*.wav-files in classifier's 'In' folder. |
-| `delf` | Deletes files defined in either `outputData/@filesToRemove` or `inputData/@filesToRemove` (it depends where `delf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)) |
-| `movf` | Moves files defined in either `outputData/@filesToMove` or `inputData/@filesToMove` (it depends where `movf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)) |
-| `daec` or `daef` | Deletes everything except 'config.xml' in classifier's 'In' folder. |
-| `sftp` | Fetches from SFTP some input data for tests of type `generateTests`. |
-| `cpif` | For failed tests copy contents of classifier's 'In' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\In', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
-| `cpof` | For failed tests copy contents of classifier's 'Out' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\Out', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
+| `none` or ``      | Do nothing |
+| `0` or `clri`     | Empty classifier's 'In' folder |
+| `1` or `spc1`     | Copies contents of folder specified in [*inPath*](#inPath) into classifier's 'In' folder |
+| `2` or `seqh`     |  |
+| `def1`            | ????? |
+| `def2`            | Copies contents of ['def2'](#def2) folder into classifier's 'In' folder. |
+| `def3`            | Copies contents of ['def3'](#def3) folder into classifier's 'In' folder. |
+| `delw`            | Deletes \*.wav-files in classifier's 'In' folder. |
+| `delf`            | Deletes files defined in either `outputData/@filesToRemove` or `inputData/@filesToRemove` (it depends where `delf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)) |
+| `movf`            | Moves files defined in either `outputData/@filesToMove` or `inputData/@filesToMove` (it depends where `movf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)) |
+| `daec` or `daef`  | Deletes everything except 'config.xml' in classifier's 'In' folder. |
+| `sftp`            | Fetches from SFTP some input data for tests of type `generateTests`. |
+| `cpif`            | For failed tests copy contents of classifier's 'In' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\In', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
+| `cpof`            | For failed tests copy contents of classifier's 'Out' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\Out', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
 
 &nbsp;
 
 ### <a name="taskGroup">3.1. taskGroup</a>
 
 ```
-	<taskGroup enable="0" testType="taskGroup" />
+<taskGroup enable="0" testType="taskGroup" />
 ```
-Picture 3.1.1. - Writing format in config.xml of a task with *testType*=`taskGroup`
+Picture 3.1.1. - Writing format in testingConfig.xml of a task with *testType*=`taskGroup`
 
 &nbsp;
 
@@ -179,20 +179,20 @@ Picture 3.2.1. - Writing format in config.xml of a task with *testType*=`sftpSyn
 
 Table 3.2.1. - structure of a task with *testType*=`sftpSync`
 
-| Name of the field | Description                                                          |
-|-------------------|----------------------------------------------------------------------|
-| *path* | Root path of a local mirror. |
-| **\<localPath/>**          | Specifies local path for synchronization. |
-| &nbsp;&nbsp;*path* | Root path of a local mirror. |
-| &nbsp;&nbsp;*exclude* | Specifies path(-s) which is(are) ignored during synchronization. |
-| **\<remotePath/>**    | Specifies remote path(-s) to synchronize with. |
-| &nbsp;&nbsp;*include* | One or more paths on the remote to synchronize with. |
-| &nbsp;&nbsp;*exclude* | One or more paths on the remote which are ignored during synchronization. |
-| **\<options/>**         |                     |
+| Name of the field                      | Description                                                          |
+|----------------------------------------|----------------------------------------------------------------------|
+| *path*                                 | Root path of a local mirror. |
+| **\<localPath/>**                      | Specifies local path for synchronization. |
+| &nbsp;&nbsp;*path*                     | Root path of a local mirror. |
+| &nbsp;&nbsp;*exclude*                  | Specifies path(-s) which is(are) ignored during synchronization. |
+| **\<remotePath/>**                     | Specifies remote path(-s) to synchronize with. |
+| &nbsp;&nbsp;*include*                  | One or more paths on the remote to synchronize with. |
+| &nbsp;&nbsp;*exclude*                  | One or more paths on the remote which are ignored during synchronization. |
+| **\<options/>**                        |                     |
 | &nbsp;&nbsp;*deletePresentOnlyLocally* | When *deletePresentOnlyLocally*="`1`" then elements which present locally and absent remotely are deleted; when *deletePresentOnlyLocally*="`0`" then they are placed to the remote.  |
-| &nbsp;&nbsp;*updateRemote*     | If *updateRemote*="`0`" then do nothing if a local file is newer than the corresponding remote one; when *updateRemote*="`1`" then upload the file to the remote (with overriding the file which was there before). |
-| &nbsp;&nbsp;*preLocalCopying*     | Enable/disable the following chain of actions:<br/><br/>1) Copying everything (except folders starting with '!_') from '\FunctionalTesting\ftpTemp\SingleTests' to '\FunctionalTesting\testsIn';<br/><br/>2) there's special treatment of folders '!_defaultInputData_auto' and '!_defaultInputData_history':<br/><br/>&nbsp;&nbsp;2.1)copying \*.wav-files, 'historyFiles' folder, 'files.xml' and 'equipmentProfile.xml' from the corresponding folder located in '\FunctionalTesting\ftpTemp\SingleTests';<br/><br/>&nbsp;&nbsp;2.2) copying 'standardConfig.xml' and 'standardInformativeTags.xml' located in '\ComputeFramework\Classifier\Library\commonFunctions\preProcessing' with renaming into 'config.xml' and 'informativeTags.xml' respectively;<br/><br/>3) for tasks with *testType*="`generateTests`" creating folders specified in *inPath* and copying there 'equipmentProfile.xml' located in '\ComputeFramework\Equipment\_dataset_\taskTag', where 'taskTag' is a tag of task's element |
-| &nbsp;&nbsp;*postLocalCopying*     | Copying of 'historyFiles' folder from task's folder in 'testIn' into corresponding folder in 'ftpTemp/SingleTests'. This is only done for tasks with *testType*="`generateTests`", *enable*="`1`" and *generate*="`1`". After this synchronization with sftp is performed |
+| &nbsp;&nbsp;*updateRemote*             | If *updateRemote*="`0`" then do nothing if a local file is newer than the corresponding remote one; when *updateRemote*="`1`" then upload the file to the remote (with overriding the file which was there before). |
+| &nbsp;&nbsp;*preLocalCopying*          | Enable/disable the following chain of actions:<br/><br/>1) Copying everything (except folders starting with '!_') from '\FunctionalTesting\ftpTemp\SingleTests' to '\FunctionalTesting\testsIn';<br/><br/>2) there's special treatment of folders '!_defaultInputData_auto' and '!_defaultInputData_history':<br/><br/>&nbsp;&nbsp;2.1)copying \*.wav-files, 'historyFiles' folder, 'files.xml' and 'equipmentProfile.xml' from the corresponding folder located in '\FunctionalTesting\ftpTemp\SingleTests';<br/><br/>&nbsp;&nbsp;2.2) copying 'standardConfig.xml' and 'standardInformativeTags.xml' located in '\ComputeFramework\Classifier\Library\commonFunctions\preProcessing' with renaming into 'config.xml' and 'informativeTags.xml' respectively;<br/><br/>3) for tasks with *testType*="`generateTests`" creating folders specified in *inPath* and copying there 'equipmentProfile.xml' located in '\ComputeFramework\Equipment\_dataset_\taskTag', where 'taskTag' is a tag of task's element |
+| &nbsp;&nbsp;*postLocalCopying*         | Copying of 'historyFiles' folder from task's folder in 'testIn' into corresponding folder in 'ftpTemp/SingleTests'. This is only done for tasks with *testType*="`generateTests`", *enable*="`1`" and *generate*="`1`". After this synchronization with sftp is performed |
 
 &nbsp;
 
@@ -245,11 +245,11 @@ Picture 3.5.1. - Writing format in config.xml of a task with *testType*=`dataMat
 
 Table 3.5.1. - description of additional fields in a task with *testType*=`dataMatch`
 
-| Name of the field | Description                                                          |
-|-------------------|----------------------------------------------------------------------|
-| **\<outputData/>**          |  |
-| &nbsp;&nbsp;*datamatch_fields*    | Contains an XPath-expression which returns fields to compare in status and reference files. In the case when *datamatch_fields*="``" then all corresponding items in status and reference will be compared. |
-| &nbsp;&nbsp;*datamatch_tolerance*    | Contains either a numeric value of tolerance or an XPath-expression for quering the framework's config for it. |
+| Name of the field                 | Description                                                          |
+|-----------------------------------|----------------------------------------------------------------------|
+| **\<outputData/>**                |  |
+| &nbsp;&nbsp;*datamatch_fields*    | Contains an XPath-expression which returns fields to compare in status and reference files. In the case when *datamatch_fields*="" then all items in status and reference will be compared. |
+| &nbsp;&nbsp;*datamatch_tolerance* | Contains either a numeric value of tolerance or an XPath-expression for quering the framework's config for it. |
 
 &nbsp;
 
