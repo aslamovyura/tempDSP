@@ -65,9 +65,9 @@ Table 1.1. - **\<generalSettings/>** structure
 | **\<commonInputData3_Path/>**, | Source of default Framework's input history data                                              |
 | &nbsp;&nbsp;*name* |                                               |
 | &nbsp;&nbsp;<a name="def3">*path*</a> |                                               |
-| **\<standardConfig_Path/>** | <td rowspan=2> Relative path to the Framework's standard config file |
+| **\<standardConfig_Path/>** | <td rowspan=2>Relative path to the Framework's standard config file |
 | &nbsp;&nbsp;*path* |                                               |
-| **\<standardInformativeTags_Path/>** | <td rowspan=2>  Relative path to the standard informative tags file |
+| **\<standardInformativeTags_Path/>** | <td rowspan=2>Relative path to the standard informative tags file |
 | &nbsp;&nbsp;*path* |         |
 | **\<taskGroups/>**         | Specifies specific behaviour of tasks with certain statuses |
 | &nbsp;&nbsp;*runUnlistedTasks* | If *runUnlistedTasks*="`1`" then tasks which are not presented in **\<taskGroups/>** are treated like regular tasks (like if they were in taskGroups) |
