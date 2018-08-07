@@ -24,10 +24,10 @@ testingConfigPy.xml stores serialized tasks entities as well as common configura
 
 Table 1. - A brief testingConfigPy.xml structure
 
-| Name of the field        | Description                                                                                                                   |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| **\<generalSettings/>**  | Intended for storing common configurations settings of the tasks: common paths, switching on/off an output of certain data, etc. |
-| **\<taskGroups/>**       | Intended for listing tasks to be executed as well as defining their order of execution.                                                |
+| Name of the field         | Description                                                                                                                   |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| **\<generalSettings/>**   | Intended for storing common configurations settings of the tasks: common paths, switching on/off an output of certain data, etc. |
+| **\<taskGroups/>**        | Intended for listing tasks to be executed as well as defining their order of execution.                                                |
 | **\<task1/>...\<taskN/>** | 'task1' and 'taskN' are placeholders for elements' actual tags whereas a tag name cannot be 'generalSettings' or 'taskGroups' or have a name of an already existing element. Every element might be either a single task or a task group with an arbitrary number of nesting level. These elements' tags are supposed to be referenced in **\<taskGroups/>**.                           | 
 
 &nbsp;
@@ -219,18 +219,18 @@ Elements listed in the table 3.2 are common for any testing task (i.e. for `keyP
 
 | Name of the field | Description                                                          |
 |-------------------|----------------------------------------------------------------------|
-| **\<inputData/>**          |  |
-| &nbsp;&nbsp;<a name="copyIn">*copyIn*</a>    | Specifies specific actions executed prior Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyIn*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
-| &nbsp;&nbsp;<a name="inPath">*inPath*</a>    | Specifies path of tests' input data. Might be empty. Usage example: *inPath*="`\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles`". |
-| &nbsp;&nbsp;*editConfig*    | Specifies values to modify in the Framework's config in the following format: "`elementTag, attributeTag, valueToSet`". If there are multiple such entries then either '; ' or ';; ' is used as a delimiter (but both cannot be used simultaneously!). ';; ' is used in cases when changing value has ';'. Usage examples: *editConfig*="`equipmentStateDetectionEnable, value, 1; debugModeEnable, value, 0`", *editConfig*="`evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048`" |
-| &nbsp;&nbsp;*filesToRemove*    | Specifies path(-s) to remove prior Framework's call. |
-| &nbsp;&nbsp;*filesToMove*    | Specifies items to move prior Framework's call. Written in the following format: `source -&gt; destination`, where `source` and `destination` are placeholders for paths in a filesystem. Example usage: *filesToMove*="`\ComputeFramework\Classifier\In\translations_test.xml -&gt; \ComputeFramework\Classifier\Library\translations\translations_test.xml`" |
-| **\<outputData/>**          |  |
-| &nbsp;&nbsp;<a name="copyOut">*copyOut*</a>     | Specifies specific actions to be executed after Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyOut*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
-| &nbsp;&nbsp;*findInLog*    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](../../Docs/SPEC/\[SPEC\]\[12\] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](../../Docs/SPEC/\[SPEC\]\[12\] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
-| &nbsp;&nbsp;*filesToCheck*    | Specifies path(-s) to check existence for. Used by a task of type `objectExist`. |
-| &nbsp;&nbsp;*filesToRemove*    | Specifies path(-s) to remove after Framework's call. |
-| &nbsp;&nbsp;*filesToMove*    | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
+| **\<inputData/>**                           |  |
+| &nbsp;&nbsp;<a name="copyIn">*copyIn*</a>   | Specifies specific actions executed prior Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyIn*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
+| &nbsp;&nbsp;<a name="inPath">*inPath*</a>   | Specifies path of tests' input data. Might be empty. Usage example: *inPath*="`\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles`". |
+| &nbsp;&nbsp;*editConfig*                    | Specifies values to modify in the Framework's config in the following format: "`elementTag, attributeTag, valueToSet`". If there are multiple such entries then either '; ' or ';; ' is used as a delimiter (but both cannot be used simultaneously!). ';; ' is used in cases when changing value has ';'. Usage examples: *editConfig*="`equipmentStateDetectionEnable, value, 1; debugModeEnable, value, 0`", *editConfig*="`evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048`" |
+| &nbsp;&nbsp;*filesToRemove*                 | Specifies path(-s) to remove prior Framework's call. |
+| &nbsp;&nbsp;*filesToMove*                   | Specifies items to move prior Framework's call. Written in the following format: `source -&gt; destination`, where `source` and `destination` are placeholders for paths in a filesystem. Example usage: *filesToMove*="`\ComputeFramework\Classifier\In\translations_test.xml -&gt; \ComputeFramework\Classifier\Library\translations\translations_test.xml`" |
+| **\<outputData/>**                          |  |
+| &nbsp;&nbsp;<a name="copyOut">*copyOut*</a> | Specifies specific actions to be executed after Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyOut*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
+| &nbsp;&nbsp;*findInLog*                     | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
+| &nbsp;&nbsp;*filesToCheck*                  | Specifies path(-s) to check existence for. Used by a task of type `objectExist`. |
+| &nbsp;&nbsp;*filesToRemove*                 | Specifies path(-s) to remove after Framework's call. |
+| &nbsp;&nbsp;*filesToMove*                   | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
 
 &nbsp;
 
@@ -276,7 +276,7 @@ A task of type `sftpSync` is used for synchronization local folder with sftp's o
 	<options deletePresentOnlyLocally="0" updateRemote="0" preLocalCopying="0" postLocalCopying="0"/>
 </sftpSync>
 ```
-Figure 3.2.1. - Writing format in config.xml of a task with *testType*=`sftpSync`
+Figure 3.2.1. - Writing format in testingConfigPy.xml of a task with *testType*=`sftpSync`
 
 &nbsp;
 
@@ -288,8 +288,8 @@ Table 3.2.1. - structure of a task with *testType*=`sftpSync`
 | &nbsp;&nbsp;*path*                     | Root path of a local mirror. |
 | &nbsp;&nbsp;*exclude*                  | Specifies path(-s) which is(are) ignored during synchronization. |
 | **\<remotePath/>**                     | Specifies remote path(-s) to synchronize with. |
-| &nbsp;&nbsp;*include*                  | One or more paths on the remote to synchronize with. |
-| &nbsp;&nbsp;*exclude*                  | One or more paths on the remote which are ignored during synchronization. |
+| &nbsp;&nbsp;*include*                  | Specifies path(-s) on the remote to synchronize with. |
+| &nbsp;&nbsp;*exclude*                  | Specifies path(-s) on the remote which (is)are ignored during synchronization. |
 | **\<options/>**                        |                     |
 | &nbsp;&nbsp;*deletePresentOnlyLocally* | When *deletePresentOnlyLocally*="`1`" then elements which present locally and absent remotely are deleted; when *deletePresentOnlyLocally*="`0`" then they are placed to the remote.  |
 | &nbsp;&nbsp;*updateRemote*             | If *updateRemote*="`0`" then do nothing if a local file is newer than the corresponding remote one; when *updateRemote*="`1`" then upload the file to the remote (with overriding the file which was there before). |
@@ -309,7 +309,7 @@ This task is intended for checking the Framework's log for presence of certain c
 	<outputData copyOut="cpif, cpof" findInLog="'Code: I086', 'Code: I088', 'Code: 0006', 'Code: 0007', 'Code: 0008', 'Code: 0009', 'Code: 0010', 'Code: 0011'" outPath="" description=""/>
 </keyPhrase>	
 ```
-Figure 3.3.1. - Writing format in config.xml of a task with *testType*=`keyPhrase`
+Figure 3.3.1. - Writing format in testingConfigPy.xml of a task with *testType*=`keyPhrase`
 
 &nbsp;
 
@@ -324,7 +324,7 @@ This task is intended for checking for presence of items in file system after Fr
 	<outputData copyOut="cpif, cpof" outPath="" filesToCheck="\ComputeFramework\Classifier\Out" description=""/>
 </objectExist>	
 ```
-Figure 3.4.1. - Writing format in config.xml of a task with *testType*=`objectExist`
+Figure 3.4.1. - Writing format in testingConfigPy.xml of a task with *testType*=`objectExist`
 
 &nbsp;
 
@@ -337,7 +337,7 @@ A task of type `dataMatch` is used to compare a status-file generated by the Fra
 	<outputData copyOut="cpif, cpof" findPath="0" outPath="\ComputeFramework\FunctionalTesting\testsOut\frequencyCorrectionDataMatch" description="compare with output of testing object" datamatch_fields="//*[self::frequencyCorrector]/@estimatedFrequency | /equipment/frequencyCorrector/status/@value" datamatch_tolerance="0.1"/>
 </dataMatch>	
 ```
-Figure 3.5.1. - Writing format in config.xml of a task with *testType*=`dataMatch`
+Figure 3.5.1. - Writing format in testingConfigPy.xml of a task with *testType*=`dataMatch`
 
 &nbsp;
 
@@ -360,7 +360,7 @@ Table 3.5.1. - description of additional fields in a task with *testType*=`dataM
 	<outputData copyOut="cpif, cpof" outPath="" description="compare with output of testing object" findInLog="'[Framework] Framework processing. \n @status.xml file was successfully updated by history.', '[Framework] History processing. \n History processing COMPLETE.'"/>
 </creationHistory>
 ```
-Figure 3.6.1. - Writing format in config.xml of a task with *testType*=`creationHistory`
+Figure 3.6.1. - Writing format in testingConfigPy.xml of a task with *testType*=`creationHistory`
 
 &nbsp;
 
@@ -378,7 +378,7 @@ Tasks of type `generateTests` have few essential characteristics.
 	<outputData copyOut="cpif, cpof" outPath=""/>
 </generateTests>	
 ```
-Figure 3.7.1. - Writing format in config.xml of a task with *testType*=`generateTests` before tests generation
+Figure 3.7.1. - Writing format in testingConfigPy.xml of a task with *testType*=`generateTests` before tests generation
 
 &nbsp;
 
@@ -392,7 +392,7 @@ Figure 3.7.1. - Writing format in config.xml of a task with *testType*=`generate
 	<Periodicities_datamatchHistory enable="0" testType="datamatchHistory" description="" datamatch_fields="" datamatch_tolerance="" testName="Periodicities_datamatchHistory"/>
 </generateTests>	
 ```
-Figure 3.7.2. - Writing format in config.xml of a task with *testType*=`generateTests` after tests generation
+Figure 3.7.2. - Writing format in testingConfigPy.xml of a task with *testType*=`generateTests` after tests generation
 
 &nbsp;
 
@@ -413,7 +413,7 @@ Table 3.7.1. - description of additional fields in a task with *testType*=`gener
 
 ### <a name="taskGroupsExample1">Example 1. taskGroups: re-specifiying attributes' values </a>
 
-Assume we have the following simplified\* snippet (\* - here and further in examples some required elements/attributes are ommited for simplicity):
+Assume we have the following simplified\* xml-snippet (\* - here and further in examples some required elements/attributes are omitted for simplicity):
 ```
 <taskGroups>
 	<outerTask>
@@ -478,12 +478,12 @@ and the following `sftpSync` task:
 	<options deletePresentOnlyLocally="0" updateRemote="0" preLocalCopying="0" postLocalCopying="0"/>
 </exampleTask>
 ```
-then after running the task, there will be the following file structure on the local (assuming that there haven't been any of the items from the remote before):
+then after running the task, there will be the following file structure on the local (assuming that there weren't any of the items from the remote before):
 ```
 baseFolder\
 └── ftpTemp
     ├── folder1\
     │   └── plainFile1.ext
-	└── folder2\
+    └── folder2\
         └── plainFile2.ext
 ```
