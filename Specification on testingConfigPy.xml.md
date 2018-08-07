@@ -230,7 +230,7 @@ Elements listed in the table 3.2 are common for any testing task (i.e. for `keyP
 | &nbsp;&nbsp;<a name="fil">*findInLog*</a>    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
 | &nbsp;&nbsp;<a name="ftc">*filesToCheck*</a>     | Specifies path(-s) to check existence for. Used by a task of type `objectExist`. |
 | &nbsp;&nbsp;<a name="odftr">*filesToRemove*</a>  | Specifies path(-s) to remove after Framework's call. |
-| &nbsp;&nbsp;<a name="odftr">*filesToMove*</a>    | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
+| &nbsp;&nbsp;<a name="odftm">*filesToMove*</a>    | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
 
 &nbsp;
 
