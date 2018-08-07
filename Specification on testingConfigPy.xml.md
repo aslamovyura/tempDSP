@@ -70,7 +70,7 @@ Table 1. - A brief testingConfigPy.xml structure
 		<outputData copyOut="cpif, cpof" outPath="" description="compare with output of testing object" findInLog="'[Framework] Framework processing. \n @status.xml file was successfully updated by history.', '[Framework] History processing. \n History processing COMPLETE.'"/>
 	</creationHistory>
 	
-	<generateTests enable="0" testType="generateTests" generateHistory="0" FrameworkVersion="v3.3.1" description=""> 
+	<generateTests enable="0" testType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" description=""> 
 		<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;"/>
 		<outputData copyOut="cpif, cpof" outPath=""/>
 		<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" testType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
@@ -209,6 +209,9 @@ Table 3.1 - common elements of a generic task
 |-------------------|----------------------------------------------------------------------|
 | *enable*          | Enable/disable execution of a task. Obligatory only for reference tasks in **\<generalSettings/>** (for all reference tasks *enable*="`0`" ). For all other tasks it can be skipped. In this case value of *enable* is taken from a reference task of the same type (of course, if *enable* does not present in task's corresponding element in **\<taskGroups/>**). |
 | *testType*        | Every task must have the *testType* attribute, whose value might be one of the following: `taskGroup`, `sftpSync`, `keyPhrase`, `objectExist`, `dataMatch`, `creationHistory`, `generateTests`.<br/><br/>Also the value of *testType* might have the following format: `inherit(parentTask)`, where `parentTask` is a tag of a parent task.<br/><br/>If parentTask is a nested task, it is highly recommended to specify tags of its outer tasks: `inherit(outerTaskOfParentTask/parentTask)`.<br/><br/>Explicit specifying of outer tag(-s) can be omitted only in the case when it's guaranteed that there aren't or won't be any other task whose tag is equal to the one of parentTask. |
+| *objectPath*      | Specifies path to an object by which the Framework can be launched (e.g. *objectPath*="`\ComputeFramework\Classifier\runProcessing.m`"). |
+
+&nbsp;
 
 Elements listed in the table 3.2 are common for any testing task (i.e. for `keyPhrase`, `objectExist`, `dataMatch`, `creationHistory`, `generateTests`).
 
@@ -224,7 +227,7 @@ Elements listed in the table 3.2 are common for any testing task (i.e. for `keyP
 | &nbsp;&nbsp;*filesToMove*    | Specifies items to move prior Framework's call. Written in the following format: `source -&gt; destination`, where `source` and `destination` are placeholders for paths in a filesystem. Example usage: *filesToMove*="`\ComputeFramework\Classifier\In\translations_test.xml -&gt; \ComputeFramework\Classifier\Library\translations\translations_test.xml`" |
 | **\<outputData/>**          |  |
 | &nbsp;&nbsp;<a name="copyOut">*copyOut*</a>     | Specifies specific actions to be executed after Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyOut*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
-| &nbsp;&nbsp;*findInLog*    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](ComputeFramework/Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](ComputeFramework/Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
+| &nbsp;&nbsp;*findInLog*    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](../../Docs/SPEC/\[SPEC\]\[12\] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](../../Docs/SPEC/\[SPEC\]\[12\] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
 | &nbsp;&nbsp;*filesToCheck*    | Specifies path(-s) to check existence for. Used by a task of type `objectExist`. |
 | &nbsp;&nbsp;*filesToRemove*    | Specifies path(-s) to remove after Framework's call. |
 | &nbsp;&nbsp;*filesToMove*    | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
@@ -370,15 +373,17 @@ Tasks of type `generateTests` have few essential characteristics.
 3. Tests generation includes history creation as well (i.e. when a task is executed with *generate*="`1`" history is created). After tests have been generated there might be need for history creation only. For this case *generateHistory*="`1`" is used.
 
 ```
-<generateTests enable="0" testType="generateTests" generateHistory="0" FrameworkVersion="v3.3.1" description=""> 
+<generateTests enable="0" testType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" description=""> 
 	<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;" generateTests="SSR: datamatchHistory; SST: datamatchHistory; BPR: datamatchHistory; Periodicities"/>
 	<outputData copyOut="cpif, cpof" outPath=""/>
 </generateTests>	
 ```
 Figure 3.7.1. - Writing format in config.xml of a task with *testType*=`generateTests` before tests generation
 
+&nbsp;
+
 ```
-<generateTests enable="0" testType="generateTests" generateHistory="1" FrameworkVersion="v3.3.1" description=""> 
+<generateTests enable="0" testType="generateTests" generateHistory="1" frameworkVersion="v3.3.1" description=""> 
 	<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;" />
 	<outputData copyOut="cpif, cpof" outPath=""/>
 	<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" testType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
@@ -399,7 +404,7 @@ Table 3.7.1. - description of additional fields in a task with *testType*=`gener
 | &nbsp;&nbsp;*copyIn*                | *copyIn*="`sftp, 2`" is used by default. |
 | &nbsp;&nbsp;*generateTests*         | Defines methods and tests types to generate. It is written in the following format: *generateTests*="`Method: testType`". In the case of multiple tests "; " is used to separate entries: *generateTests*="`Method1: testType1; Method2: testType2.`". |
 | &nbsp;&nbsp;*generateHistory*       | Enables/disables history generation. |
-| &nbsp;&nbsp;*FrameworkVersion*      | Used to fetch from sftp 'equipmentProfile.xml' for specified version. Example usage: *FrameworkVersion*="`v3.3.1`" DEPRECATED because in newer Framework's versions equipmentProfile.xml is stored at '\ComputeFramework\Equipment\\_dataset\_\taskTag', where `taskTag` is a placeholder for a task's element tag (e.g. if a task's element tag is `highSpeedBearing`, then 'equipmentProfile.xml' should be taken from '\ComputeFramework\Equipment\\_dataset\_\highSpeedBearing')
+| &nbsp;&nbsp;*frameworkVersion*      | Used to fetch from sftp 'equipmentProfile.xml' for specified version. Example usage: *frameworkVersion*="`v3.3.1`" DEPRECATED because in newer Framework's versions equipmentProfile.xml is stored at '\ComputeFramework\Equipment\\_dataset\_\taskTag', where `taskTag` is a placeholder for a task's element tag (e.g. if a task's element tag is `highSpeedBearing`, then 'equipmentProfile.xml' should be taken from '\ComputeFramework\Equipment\\_dataset\_\highSpeedBearing')
 | &nbsp;&nbsp;**\<method_testType/>** | Sub-element representing generated test (e.g. **\<SSR\_datamatchHistory/>** in the Fig. 3.7.2.). It has the following attributes: *enable*, *testType*, *description*, *testName*, *datamatch\_fields*, *datamatch\_tolerance*. Writing format of *datamatch\_fields* and *datamatch\_tolerance* is the same as for tasks of [`datamatch`](#dataMatch) type.  |
 
 &nbsp;
@@ -425,10 +430,10 @@ In this example the task `./outerTask/innerTask` will be executed because of:
 1) the element `./taskGroups/outerTask` does not have an `enable` attribute, so `./outerTask/@enable`'s value is used;
 2) `./taskGroups/outerTask/innerTask` has an `enable` attribute, whose value is used instead of `./outerTask/innerTask`'s one.
 
+&nbsp;
 
 ### <a name="inheritanceExample">Example 2. Inheritance</a>
 
-&nbsp;
 The following xml-snippet illustrates an example usage of inheritance when specifiyng value of *testType*:
 ```
 <parentTask enable="1" testType="keyPhrase">
@@ -450,6 +455,8 @@ In fact, `inheritedTask` will have the following structure:
 </inheritedTask>
 ```
 
+&nbsp;
+
 ### <a name="sftpSyncExample1">Example 3. sftpSync usage</a>
 
 Let's assume we have the following file structure on the remote:
@@ -457,11 +464,11 @@ Let's assume we have the following file structure on the remote:
 root/
 ├── folder1/
 │   ├── fileToIgnoreLocally.ext
-│	└── plainFile1.ext
+│   └── plainFile1.ext
 └── someFolder/
-	└── folder2/
-	    ├── fileToIgnoreRemotely.ext
-	    └── plainFile2.ext
+    └── folder2/
+        ├── fileToIgnoreRemotely.ext
+        └── plainFile2.ext
 ```
 and the following `sftpSync` task:
 ```
@@ -475,8 +482,8 @@ then after running the task, there will be the following file structure on the l
 ```
 baseFolder\
 └── ftpTemp
-	├── folder1\
-	│	└── plainFile1.ext
+    ├── folder1\
+    │   └── plainFile1.ext
 	└── folder2\
-		└── plainFile2.ext
+        └── plainFile2.ext
 ```
