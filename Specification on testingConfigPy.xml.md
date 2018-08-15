@@ -37,68 +37,63 @@ Table 1. - A brief testingConfigPy.xml structure
 ```
 <generalSettings>
 
-	<taskGroup enable="0" testType="taskGroup">
+	<taskGroup enable="0" taskType="taskGroup">
 	</taskGroup>
 	
-	<sftpSync enable="0" testType="sftpSync">
+	<sftpSync enable="0" taskType="sftpSync">
 		<localPath path="\ComputeFramework\FunctionalTesting\ftpTemp" exclude=""/>
-		<remotePath include="/data/Datasets/FunctionalTesting0/SingleTests" exclude=""/>
+		<remotePath include="/data/Datasets/FunctionalTesting/SingleTests" exclude=""/>
 		<options deletePresentOnlyLocally="0" updateRemote="0" preLocalCopying="0" postLocalCopying="0"/>
 	</sftpSync>
 	
-	<keyPhrase enable="0" testName="runnabilityAllOn" testFuncName="test_runProcessing_runnabilty" testType="keyPhrase" description="check if runProcessing.m script runs and finishes properly">
-		<testPath testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\runProcessing\runnabilityAllOn\test_runProcessing_runnabiltyAllOn.m" description="path to the test"/>
-		<inputData copyIn="clri, def2, delw, def3" editConfig="equipmentStateDetectionEnable, value, 1; debugModeEnable, value, 0; printPlotsEnable, value, 1; parpoolEnable, value, 1; frequencyTrackingEnable, value, 1; frequencyCorrectionEnable, value, 1; shaftTrajectoryDetectionEnable, value, 0"/>
-		<outputData copyOut="cpif, cpof" findInLog="'Code: I086', 'Code: I088', 'Code: 0006', 'Code: 0007', 'Code: 0008', 'Code: 0009', 'Code: 0010', 'Code: 0011'" outPath="" description=""/>
+	<keyPhrase enable="0" taskType="keyPhrase" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="check if runProcessing.m script runs and finishes properly">
+		<inputData copyIn="clri, def2, delw, def3" editConfig="decisionMakerEnable, value, 1; decisionMaker/decisionMaker, processingEnable, 1; decisionMaker/decisionMakerHistory, processingEnable, 1; spm/spmDBmDBc, processingEnable, 1; spm/spmLRHR, processingEnable, 1; scalogramHandler, processingEnable, 1; periodicityProcessing, processingEnable, 1"/>
+		<outputData copyOut="cpif, cpof" findInLog="'Code: I086', 'Code: I088', 'Code: 0006'" outPath="" description=""/>
 	</keyPhrase>
 	
-	<objectExist enable="0" testName="outDirExistence" testFuncName="test_inOutExistence_outDirExistence" testType="objectExist" description="Checking existence of the @Out directory in /ComputeFramework/Classifier/">
-		<testPath findPath="0" testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\inOutExistence\outDirExistence\test_inOutExistence_outDirExistence.m" description="path to the test"/>
-		<inputData copyIn="clri, def2" findPath="0" inPath="" description="copyIn=3 - use default files only"/>
+	<objectExist enable="0" taskType="objectExist" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="Checking existence of the @Out directory in /ComputeFramework/Classifier/">
+		<inputData copyIn="clri, def2" inPath="" description="copyIn=3 - use default files only"/>
 		<outputData copyOut="cpif, cpof" outPath="" filesToCheck="\ComputeFramework\Classifier\Out" description=""/>
 	</objectExist>
 	
-	<dataMatch enable="0" testName="dataMatchInterf" testFuncName="test_frequencyCorrection_dataMatch" testType="dataMatch" description="check if frequency correction recognises typical cases properly">
-		<testPath findPath="0" testFuncPath="D:\Ratgor\GitRepo\FuncTestCopy\ComputeFramework\FunctionalTesting\testsLib\frequencyCorrection\dataMatch\test_frequencyCorrection_dataMatch.m" description="path to the test"/>
-		<inputData backupIn="1" copyIn="clri, def2, delw, spc1" findPath="0" inPath="\ComputeFramework\FunctionalTesting\testsIn\frequencyCorrection\dataMatchInterf" description="copy to the input of testing object" editConfig="historyEnable, value, 1; frequencyCorrectionEnable, value, 1"/>
-		<outputData copyOut="cpif, cpof" findPath="0" outPath="\ComputeFramework\FunctionalTesting\testsOut\frequencyCorrectionDataMatch" description="compare with output of testing object" datamatch_fields="//*[self::frequencyCorrector]/@estimatedFrequency | /equipment/frequencyCorrector/status/@value" datamatch_tolerance="0.1"/>
+	<dataMatch enable="0" taskType="dataMatch" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="check if frequency correction recognises typical cases properly">
+		<inputData copyIn="clri, def2, delw, spc1" inPath="\ComputeFramework\FunctionalTesting\testsIn\frequencyCorrection\dataMatchInterf" description="copy to the input of testing object" editConfig="historyEnable, value, 1; frequencyCorrectionEnable, value, 1"/>
+		<outputData copyOut="cpif, cpof" outPath="\ComputeFramework\FunctionalTesting\testsOut\frequencyCorrectionDataMatch" description="compare with output of testing object" datamatch_fields="//*[self::frequencyCorrector]/@estimatedFrequency | /equipment/frequencyCorrector/status/@value" datamatch_tolerance="0.1"/>
 	</dataMatch>
 	
-	<creationHistory enable="0" testName="runabilityFull" testFuncName="test_creatingHistoryFiles_runabilityFull" testType="creationHistory" description="">
-		<testPath testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\creatingHistoryFiles\runabilityFull\test_creatingHistoryFiles_runabilityFull.m" description="path to the test"/>
-		<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles" description="copy to the input of testing object" editConfig="historyEnable, value, 1; printPlotsEnable, value, 1; equipmentStateDetectionEnable, value, 1; shaftDisplacementEnable, value, 1; frequencyCorrectionEnable, value, 1; frequencyDomainClassifierEnable, value, 1; timeDomainClassifierEnable, value, 1; timeFrequencyDomainClassifierEnable, value, 1; metricsEnable, value, 1; spmEnable, value, 1; iso15242Enable, value, 1; iso10816Enable, value, 1; iso7919Enable, value, 1; octaveSpectrumEnable, value, 1; decisionMakerEnable, value, 1"/>
+	<creationHistory enable="0" taskType="creationHistory" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="">
+		<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles" description="copy to the input of testing object" editConfig="historyEnable, value, 1; printPlotsEnable, value, 1; equipmentStateDetectionEnable, value, 1"/>
 		<outputData copyOut="cpif, cpof" outPath="" description="compare with output of testing object" findInLog="'[Framework] Framework processing. \n @status.xml file was successfully updated by history.', '[Framework] History processing. \n History processing COMPLETE.'"/>
 	</creationHistory>
 	
-	<generateTests enable="0" testType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" description=""> 
-		<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;"/>
+	<generateTests enable="0" taskType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" taskPath="\ComputeFramework\Classifier\runProcessing.m" description=""> 
+		<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;; evaluation/frequencyTracking/spectrogramTracker/envTracker, frequencyRange, 8:32; 8:32; 16:64; 32:128; 64:256;; evaluation/frequencyTracking/logSpectrogram, secPerFrame, 0.4;; evaluation/frequencyTracking/logSpectrogram, secOverlap, 0.3;; evaluation/frequencyCorrector/spectralBeamEstimator/validationFrames, logRange, 6 9 14;; evaluation/frequencyCorrector/displacementInterferenceEstimator/validationFrames, minPeakHeight, 6" generateTests="SSR: datamatchHistory; SST: datamatchHistory; BPR: datamatchHistory; Periodicities: datamatchHistory"/>
 		<outputData copyOut="cpif, cpof" outPath=""/>
-		<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" testType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
-		<SST_datamatchHistory enable="1" testType="datamatchHistory" description="" datamatch_fields="//frequencyTracking/informativeTags/type/@value | //frequencyTracking/informativeTags/method/@value | //frequencyTracking/informativeTags/min/@value | //frequencyTracking/informativeTags/max/@value | //frequencyTracking/informativeTags/peak2peak/@value | //frequencyTracking/informativeTags/mean/@value | //frequencyTracking/informativeTags/std/@value | //frequencyTracking/informativeTags/median/@value" datamatch_tolerance="//frequencyTracking/@accuracyPercent" testName="SST_datamatchHistory"/>
-		<BPR_datamatchHistory enable="1" testType="datamatchHistory" description="" datamatch_fields="//bearingsParametersRefinement/informativeTags/bearing/@bd | //bearingsParametersRefinement/informativeTags/bearing/@deviation" datamatch_tolerance="//bearingsParametersRefinement/ballDiameter/@percentStep" testName="BPR_datamatchHistory"/>
-		<Periodicities_datamatchHistory enable="0" testType="datamatchHistory" description="" datamatch_fields="" datamatch_tolerance="" testName="Periodicities_datamatchHistory"/>
+		<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" taskType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
+		<SST_datamatchHistory enable="1" taskType="datamatchHistory" description="" datamatch_fields="//frequencyTracking/informativeTags/type/@value | //frequencyTracking/informativeTags/method/@value | //frequencyTracking/informativeTags/min/@value" datamatch_tolerance="//frequencyTracking/@accuracyPercent" testName="SST_datamatchHistory"/>
+		<BPR_datamatchHistory enable="1" taskType="datamatchHistory" description="" datamatch_fields="//bearingsParametersRefinement/informativeTags/bearing/@bd | //bearingsParametersRefinement/informativeTags/bearing/@deviation" datamatch_tolerance="//bearingsParametersRefinement/ballDiameter/@percentStep" testName="BPR_datamatchHistory"/>
+		<Periodicities_datamatchHistory enable="0" taskType="datamatchHistory" description="" datamatch_fields="" datamatch_tolerance="" testName="Periodicities_datamatchHistory"/>
 	</generateTests>
 
-	<defaultBehaviour testEnableDefault="1" waitSlowOsTimeout="20" findPathDefault="3">
-		<exampleObject enable="1" objectName="objectName" objectType="objectType" description="unic record of a testing object">
-			<objectPath findPath="default" objectPath="\ComputeFramework\Classifier\runProcessing.m" description="path to the object of a testing"/>
-			<exampleTest enable="1" clearWorkspaceAfter="1" clearWorkspaceBefore="1" objectPath="D:\Ratgor\Git\ComputeFramework\Classifier\runProcessing.m" testName="testName" testFuncName="test_objectName_testName" testType="keyPhrase" description="some object test action description"> 
-				<testPath findPath="0" testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\runProcessing\runnability\test_runProcessing_runnabilty.m" description="path to the test"/>
-				<inputData copyIn="2" filesToRemove="\ComputeFramework\Classifier\In" filesToMove="\In\test.xml -&gt; \Out\test.xml" editConfig="0" backupIn="1" findPath="1" inPath="\ComputeFramework\FunctionalTesting\testsIn\!_defaultInputData_auto" backupPath="\ComputeFramework\FunctionalTesting\testsOut\inpitDataBackup" description="copy to the input of testing object"/>
-				<outputData copyOut="cpif, cpof, 0" filesToRemove="\ComputeFramework\Classifier\Out" filesToMove="\In\test.xml - \Out\test.xml" findInLog="Code: 0033" filesToCheck="\ComputeFramework\Classifier\Out" compareOut="0" findPath="2" outPath="\ComputeFramework\FunctionalTesting\testsOut\outputDataCopy" comparePath="\ComputeFramework\Classifier\In" errors="0;0.05;0;0.05;0.05;0.05;0.05" description="path to clasifire In, Out and Workspace backups; path to ethalon files"/>
+	<defaultBehaviour>
+		<exampleObject enable="1" objectType="objectType" description="unic record of a testing object">
+			<exampleTest enable="1" clearWorkspaceAfter="1" clearWorkspaceBefore="1" taskType="keyPhrase" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="some object test action description">    
+				<inputData copyIn="2" filesToRemove="\ComputeFramework\Classifier\In" filesToMove="\In\test.xml -&gt; \Out\test.xml" editConfig="0" inPath="\ComputeFramework\FunctionalTesting\testsIn\!_defaultInputData_auto" description="copy to the input of testing object"/>
+				<outputData copyOut="cpif, cpof, 0" filesToRemove="\ComputeFramework\Classifier\Out" filesToMove="\In\test.xml - \Out\test.xml" findInLog="Code: 0033" filesToCheck="\ComputeFramework\Classifier\Out" outPath="\ComputeFramework\FunctionalTesting\testsOut\outputDataCopy" description="path to clasifire In, Out and Workspace backups; path to ethalon files"/>
 			</exampleTest>
 		</exampleObject>
 	</defaultBehaviour>
+
 	<testingReport shortLogEnable="1" description=""/>
 	<testsInputPath inPath="\ComputeFramework\FunctionalTesting\testsIn" description=""/>
 	<rawdataInFold path="rawdata" description="Required name of raw data directory in the input path. It will be created in testing object input path and all wav files will be copied in specified folder."/>
-	<commonInputData0_Path name="none" description="mnemonics for of default input composition. 'none' for nothing, 'clri' for clear input folder, 'spc1' for copy special input data #1, 'cdi1' for cpoy common input data #1, 'delw' for delete wavs, etc."/>
 	<commonInputData2_Path name="def2" path="\ComputeFramework\FunctionalTesting\testsIn\!_defaultInputData_auto"/>
 	<commonInputData3_Path name="def3" path="\ComputeFramework\FunctionalTesting\testsIn\!_defaultInputData_history"/>
 	<standardConfig_Path path="\ComputeFramework\Classifier\Library\commonFunctions\preProcessing\standardConfig.xml"/>
 	<standardInformativeTags_Path path="\ComputeFramework\Classifier\Library\commonFunctions\preProcessing\standardInformativeTags.xml"/>
-	<taskGroups runUnlistedTasks="0" showUnlistedTasks="0" showDisabledTasks="0" showMissedTasks="1" unlistedTasksStatus="notUsed"/>
-	<postProcessing saveInputDataOfFailedTests="1" saveOutputDataOfFailedTests="1" useCmd="1" />
+	<taskGroups runUnlistedTasks="0" showUnlistedTasks="0" showDisabledTasks="1" showMissedTasks="1" unlistedTasksStatus="notUsed"/>
+	<postProcessing saveInputDataOfFailedTests="1" saveOutputDataOfFailedTests="1" useCmd="0"/>
+
 </generalSettings>
 ```
 Figure 1.1. - Example usage of **\<generalSettings/>** in testingConfigPy.xml
@@ -124,7 +119,7 @@ Table 1.1. - **\<generalSettings/>** structure
 | <a name="rdif">**\<rawdataInFold/>**</a>  |                   |
 | &nbsp;&nbsp;*path*                        | Required name of raw data directory in the input path. It will be created in testing object input path and all. wav files will be copied in specified folder. |
 | **\<commonInputData2_Path/>**             |  |
-| &nbsp;&nbsp;*name*                        | Reference name for the path (`def2`). |
+| &nbsp;&nbsp;*name*                        | Reference name for the path (`def2`).<br/><br/>Interesting to know: `def1` was used earlier, but now it's no longer in use. Though `def2` and `def3` could have been renamed into `def1` and `def2` respectively, they are still being used as `def2` and `def3` to avoid possible ambiguity. |
 | &nbsp;&nbsp;<a name="def3">*path*</a>     | Source of default Framework's input data. |
 | **\<commonInputData3_Path/>**             |                                               |
 | &nbsp;&nbsp;*name*                        | Reference name for the path (`def3`).                                              |
@@ -207,9 +202,8 @@ Table 3.1 - common elements of a generic task
 
 | Name of the field | Description                                                          |
 |-------------------|----------------------------------------------------------------------|
-| *enable*          | Enables/disables (`1`/`0`) execution of a task. Obligatory only for reference tasks in **\<generalSettings/>** (for all reference tasks *enable*="`0`" ). For all other tasks it can be skipped. In this case value of *enable* is taken from a reference task of the same type (of course, if *enable* does not present in task's corresponding element in **\<taskGroups/>**). |
-| *testType*        | Every task must have the *testType* attribute, whose value might be one of the following: `taskGroup`, `sftpSync`, `keyPhrase`, `objectExist`, `dataMatch`, `creationHistory`, `generateTests`.<br/><br/>Also the value of *testType* might have the following format: `inherit(parentTask)`, where `parentTask` is a tag of a parent task.<br/><br/>If parentTask is a nested task, it is highly recommended to specify tags of its outer tasks: `inherit(outerTaskOfParentTask/parentTask)`.<br/><br/>Explicit specifying of outer tag(-s) can be omitted only in the case when it's guaranteed that there aren't or won't be any other task whose tag is equal to the one of parentTask. |
-| *objectPath*      | Specifies path to an object by which the Framework can be launched (e.g. *objectPath*="`\ComputeFramework\Classifier\runProcessing.m`"). |
+| *enable*          | Enables/disables (`1`/`0`) execution of a task. Obligatory only for reference tasks in **\<generalSettings/>** (for all reference tasks *enable*="`0`" ). For all other tasks it can be skipped. In this case value of *enable* is taken from a reference task of the same type (of course, if *enable* does not present in task's corresponding element in **\<taskGroups/>**).<br/><br/>Apart from the mentioned above, all of the following also apply when deriving an actual *enable* value for any task:<br/>1) a task is disabled if its outer task's *enable* value is set to `0` despite the *enable* value of the former;<br/>2) as it [was said](#taskGroups) earlier, elements in **\<taskGroups/>** might re-specify attributes of their corresponding tasks' elemenents. *enable* is no exception. If there is a task's corresponding element with *enable* attribute in **\<taskGroups/>**, then its value is used and task element's *enable* value is not taken into account.<br/><br/>See [the example](#enablesExample) for details. |
+| *taskType*        | Every task must have the *taskType* attribute, whose value might be one of the following: `taskGroup`, `sftpSync`, `keyPhrase`, `objectExist`, `dataMatch`, `creationHistory`, `generateTests`.<br/><br/>Also the value of *taskType* might have the following format: `inherit(parentTask)`, where `parentTask` is a tag of a parent task.<br/><br/>If parentTask is a nested task, it is highly recommended to specify tags of its outer tasks: `inherit(outerTaskOfParentTask/parentTask)`.<br/><br/>Explicit specifying of outer tag(-s) can be omitted only in the case when it's guaranteed that there aren't or won't be any other task whose tag is equal to the one of parentTask. |
 
 &nbsp;
 
@@ -224,13 +218,14 @@ Elements listed in the table 3.2 are common for any testing task (i.e. for `keyP
 | &nbsp;&nbsp;<a name="inPath">*inPath*</a>        | Specifies path of tests' input data. Might be empty. Usage example: *inPath*="`\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles`". |
 | &nbsp;&nbsp;*editConfig*                         | Specifies values to modify in the Framework's config in the following format: "`elementTag, attributeTag, valueToSet`". If there are multiple such entries then either '; ' or ';; ' is used as a delimiter (but both cannot be used simultaneously!). ';; ' is used in cases when changing value has ';'. Usage examples: *editConfig*="`equipmentStateDetectionEnable, value, 1; debugModeEnable, value, 0`", *editConfig*="`evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048`" |
 | &nbsp;&nbsp;<a name="idftr">*filesToRemove*</a>  | Specifies path(-s) to remove prior Framework's call. |
-| &nbsp;&nbsp;<a name="idftm">*filesToMove*</a>    | Specifies items to move prior Framework's call. Written in the following format: `source -&gt; destination`, where `source` and `destination` are placeholders for paths in a filesystem. Example usage: *filesToMove*="`\ComputeFramework\Classifier\In\translations_test.xml -&gt; \ComputeFramework\Classifier\Library\translations\translations_test.xml`" |
+| &nbsp;&nbsp;<a name="idftm">*filesToMove*</a>    | Specifies items to move prior Framework's call. Written in the following format: `source -&gt; destination`, where `source` and `destination` are placeholders for paths in a filesystem; `-&gt;` is a delimiter (`->` is the actual representation of a delimiter, but `>` must be escaped in xml-documents via `&gt;`). Example usage: *filesToMove*="`\ComputeFramework\Classifier\In\translations_test.xml -&gt; \ComputeFramework\Classifier\Library\translations\translations_test.xml`" |
 | **\<outputData/>**                               |  |
 | &nbsp;&nbsp;<a name="copyOut">*copyOut*</a>      | Specifies specific actions to be executed after Framework's call. In the case of many actions they are listed as comma separated values(i.e. *copyOut*="`cmd1, cmd2, cmd3`", where `cmd1`, `cmd2`, `cmd3` are placeholders for commands listed in the table 3.3). |
-| &nbsp;&nbsp;<a name="fil">*findInLog*</a>    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
+| &nbsp;&nbsp;<a name="fil">*findInLog*</a>    | Specifies keyphrases to find in Framework's execution log. Every keyphrase is either a code or a message from [this document](./../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx). If code is used then following format for each entry is used: `'Code: XXXX'`, where `XXXX` is a placeholder of a 4-character code (e.g. `I086`). Messages are used as like they are presented in [this document](./../../Docs/SPEC/[SPEC][12] Описание сообщений в лог-файлах.docx), except the case of multi-line messages. In this case " \n " is used as a delimiter of lines. Usage examples: *findInLog*="`'Code: I086', 'Code: I088'`", *findInLog*="`'[Framework] Initialization processing. \n Common plotting parameters are correct.', '[Framework] Initialization processing. \n Plotting parameters are correct.'`". Used by tasks of types `keyPhrase` and `creationHistory`. |
 | &nbsp;&nbsp;<a name="ftc">*filesToCheck*</a>     | Specifies path(-s) to check existence for. Used by a task of type `objectExist`. |
 | &nbsp;&nbsp;<a name="odftr">*filesToRemove*</a>  | Specifies path(-s) to remove after Framework's call. |
 | &nbsp;&nbsp;<a name="odftm">*filesToMove*</a>    | It has the same specification as the one in **\<inputData/>** except performing moving after Framework's call. |
+| *taskPath*      | Specifies path to an object by which the Framework can be launched (e.g. *taskPath*="`\ComputeFramework\Classifier\runProcessing.m`"). |
 
 &nbsp;
 
@@ -248,7 +243,6 @@ Table 3.3. - possible commands of *copyIn* and *copyOut*
 | `delf`            | Deletes files defined in either [`outputData/@filesToRemove`](#odftr) or [`inputData/@filesToRemove`](#idftr) (it depends where `delf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)). |
 | `movf`            | Moves files defined in either [`outputData/@filesToMove`](odftm) or [`inputData/@filesToMove`](#idftm) (it depends where `movf` is declared: in [*copyIn*](#copyIn) or [*copyOut*](#copyOut)). |
 | `daec` or `daef`  | Deletes everything except 'config.xml' in classifier's 'In' folder. |
-| `sftp`            | Fetches from SFTP some input data for tests of type [`generateTests`](#generateTests). |
 | `cpif`            | For failed tests copies contents of classifier's 'In' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\In', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
 | `cpof`            | For failed tests copies contents of classifier's 'Out' folder into 'FunctionalTesting\testsOutPython\outerTaskTag_taskTag\Out', where 'outerTaskTag_taskTag' is the name of a folder formed by concatenating tag of a task and tags of its outer tasks. |
 
@@ -259,29 +253,29 @@ Table 3.3. - possible commands of *copyIn* and *copyOut*
 A task of type `taskGroup` is used for aggregation of other tasks.
 
 ```
-<taskGroup enable="0" testType="taskGroup">
+<taskGroup enable="0" taskType="taskGroup">
 </taskGroup>
 ```
-Figure 3.1.1. - Example usage of a task with *testType*=`taskGroup` in testingConfigPy.xml 
+Figure 3.1.1. - Example usage of a task with *taskType*=`taskGroup` in testingConfigPy.xml 
 
 &nbsp;
 
 ### <a name="sftpSync">3.2. sftpSync</a>
 
-A task of type `sftpSync` is used for synchronization local folder with sftp's one(-s) and local copying of some data (see Table 3.2.1., [Example 3](#sftpSyncExample1) for details).
+A task of type `sftpSync` is used for synchronization local folder with sftp's one(-s) and local copying of some data (see Table 3.2.1., [Example 4](#sftpSyncExample1) for details).
 
 ```
-<sftpSync enable="0" testType="sftpSync">
+<sftpSync enable="0" taskType="sftpSync">
 	<localPath path="\ComputeFramework\FunctionalTesting\ftpTemp" exclude=""/>
-	<remotePath include="/data/Datasets/FunctionalTesting0/SingleTests" exclude=""/>
+	<remotePath include="/data/Datasets/FunctionalTesting/SingleTests" exclude=""/>
 	<options deletePresentOnlyLocally="0" updateRemote="0" preLocalCopying="0" postLocalCopying="0"/>
 </sftpSync>
 ```
-Figure 3.2.1. - Example usage of a task with *testType*=`sftpSync` in testingConfigPy.xml
+Figure 3.2.1. - Example usage of a task with *taskType*=`sftpSync` in testingConfigPy.xml
 
 &nbsp;
 
-Table 3.2.1. - structure of a task with *testType*=`sftpSync`
+Table 3.2.1. - structure of a task with *taskType*=`sftpSync`
 
 | Name of the field                      | Description                                                          |
 |----------------------------------------|----------------------------------------------------------------------|
@@ -294,8 +288,8 @@ Table 3.2.1. - structure of a task with *testType*=`sftpSync`
 | **\<options/>**                        |                     |
 | &nbsp;&nbsp;*deletePresentOnlyLocally* | When *deletePresentOnlyLocally*="`1`" then elements which present locally and absent remotely are deleted; when *deletePresentOnlyLocally*="`0`" then they are placed to the remote.  |
 | &nbsp;&nbsp;*updateRemote*             | If *updateRemote*="`0`" then do nothing if a local file is newer than the corresponding remote one; when *updateRemote*="`1`" then upload the file to the remote (with overriding the file which was there before). |
-| &nbsp;&nbsp;*preLocalCopying*          | Enables/disables (`1`/`0`) the following chain of actions:<br/><br/>1) Copying everything (except folders starting with '!\_') from '\FunctionalTesting\ftpTemp\SingleTests' to '\FunctionalTesting\testsIn';<br/><br/>2) there's special treatment of folders '!\_defaultInputData\_auto' and '!\_defaultInputData\_history':<br/><br/>&nbsp;&nbsp;2.1)copying \*.wav-files, 'historyFiles' folder, 'files.xml' and 'equipmentProfile.xml' from the corresponding folder located in '\FunctionalTesting\ftpTemp\SingleTests';<br/><br/>&nbsp;&nbsp;2.2) copying 'standardConfig.xml' and 'standardInformativeTags.xml' located in '\ComputeFramework\Classifier\Library\commonFunctions\preProcessing' with renaming into 'config.xml' and 'informativeTags.xml' respectively;<br/><br/>3) for tasks with *testType*="`generateTests`" creating folders specified in *inPath* and copying there 'equipmentProfile.xml' located in '\ComputeFramework\Equipment\\_dataset\_\taskTag', where 'taskTag' is a tag of task's element |
-| &nbsp;&nbsp;*postLocalCopying*         | Copying of 'historyFiles' folder from task's folder in 'testIn' into corresponding folder in 'ftpTemp\SingleTests'. This is only done for tasks with *testType*="`generateTests`", *enable*="`1`" and *generate*="`1`". After this synchronization with sftp is performed |
+| &nbsp;&nbsp;*preLocalCopying*          | Enables/disables (`1`/`0`) the following chain of actions:<br/><br/>1) Copying everything (except folders starting with '!\_') from '\FunctionalTesting\ftpTemp\SingleTests' to '\FunctionalTesting\testsIn';<br/><br/>2) there's special treatment of folders '!\_defaultInputData\_auto' and '!\_defaultInputData\_history':<br/><br/>&nbsp;&nbsp;2.1)copying \*.wav-files, 'historyFiles' folder, 'files.xml' and 'equipmentProfile.xml' from the corresponding folder located in '\FunctionalTesting\ftpTemp\SingleTests';<br/><br/>&nbsp;&nbsp;2.2) copying 'standardConfig.xml' and 'standardInformativeTags.xml' located in '\ComputeFramework\Classifier\Library\commonFunctions\preProcessing' with renaming into 'config.xml' and 'informativeTags.xml' respectively;<br/><br/>3) for tasks with *taskType*="`generateTests`" creating folders specified in *inPath* and copying there 'equipmentProfile.xml' located in '\ComputeFramework\Equipment\\_dataset\_\taskTag', where 'taskTag' is a tag of task's element |
+| &nbsp;&nbsp;*postLocalCopying*         | Copying of 'historyFiles' folder from task's folder in 'testIn' into corresponding folder in 'ftpTemp\SingleTests'. This is only done for tasks with *taskType*="`generateTests`", *enable*="`1`" and *generate*="`1`". After this synchronization with sftp is performed |
 
 &nbsp;
 
@@ -304,13 +298,12 @@ Table 3.2.1. - structure of a task with *testType*=`sftpSync`
 This task is intended for checking the Framework's log for presence of certain codes and messages. The set of codes and messages to look for is stored in ['outputData/@findInLog'](#fil) of the task.
 
 ```
-<keyPhrase enable="0" testName="runnabilityAllOn" testFuncName="test_runProcessing_runnabilty" testType="keyPhrase" description="check if runProcessing.m script runs and finishes properly">
-	<testPath testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\runProcessing\runnabilityAllOn\test_runProcessing_runnabiltyAllOn.m" description="path to the test"/>
-	<inputData copyIn="clri, def2, delw, def3" editConfig="equipmentStateDetectionEnable, value, 1; debugModeEnable, value, 0; printPlotsEnable, value, 1; parpoolEnable, value, 1; frequencyTrackingEnable, value, 1; frequencyCorrectionEnable, value, 1; shaftTrajectoryDetectionEnable, value, 0"/>
-	<outputData copyOut="cpif, cpof" findInLog="'Code: I086', 'Code: I088', 'Code: 0006', 'Code: 0007', 'Code: 0008', 'Code: 0009', 'Code: 0010', 'Code: 0011'" outPath="" description=""/>
+<keyPhrase enable="0" taskType="keyPhrase" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="check if runProcessing.m script runs and finishes properly">
+	<inputData copyIn="clri, def2, delw, def3" editConfig="decisionMakerEnable, value, 1; decisionMaker/decisionMaker, processingEnable, 1; decisionMaker/decisionMakerHistory, processingEnable, 1; spm/spmDBmDBc, processingEnable, 1; spm/spmLRHR, processingEnable, 1; scalogramHandler, processingEnable, 1; periodicityProcessing, processingEnable, 1"/>
+	<outputData copyOut="cpif, cpof" findInLog="'Code: I086', 'Code: I088', 'Code: 0006'" outPath="" description=""/>
 </keyPhrase>	
 ```
-Figure 3.3.1. - Example usage of a task with *testType*=`keyPhrase` in testingConfigPy.xml
+Figure 3.3.1. - Example usage of a task with *taskType*=`keyPhrase` in testingConfigPy.xml
 
 &nbsp;
 
@@ -319,30 +312,28 @@ Figure 3.3.1. - Example usage of a task with *testType*=`keyPhrase` in testingCo
 This task is intended for checking for presence of items in file system after Framework's execution. Path(-s) to check is stored in ['outputData/@filesToCheck'](#ftc).
 
 ```
-<objectExist enable="0" testName="outDirExistence" testFuncName="test_inOutExistence_outDirExistence" testType="objectExist" description="Checking existence of the @Out directory in /ComputeFramework/Classifier/">
-	<testPath findPath="0" testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\inOutExistence\outDirExistence\test_inOutExistence_outDirExistence.m" description="path to the test"/>
-	<inputData copyIn="clri, def2" findPath="0" inPath="" description="copyIn=3 - use default files only"/>
-	<outputData copyOut="cpif, cpof" outPath="" filesToCheck="\ComputeFramework\Classifier\Out" description=""/>
+<objectExist enable="0" taskType="objectExist" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="Checking existence of the @Out directory in /ComputeFramework/Classifier/">
+		<inputData copyIn="clri, def2" inPath="" description="copyIn=3 - use default files only"/>
+		<outputData copyOut="cpif, cpof" outPath="" filesToCheck="\ComputeFramework\Classifier\Out" description=""/>
 </objectExist>	
 ```
-Figure 3.4.1. - Example usage of a task with *testType*=`objectExist` in testingConfigPy.xml
+Figure 3.4.1. - Example usage of a task with *taskType*=`objectExist` in testingConfigPy.xml
 
 &nbsp;
 
 ### <a name="dataMatch">3.5. dataMatch</a>
 A task of type `dataMatch` is used to compare a status-file generated by the Framework and a reference file. Items to compare are defined by an XPath-expression specified in ['outputData/@datamatch_fields'](#df). For numeric values deviation is allowable. Its threshold is stored in ['outputData/@datamatch_tolerance'](#dt). 
 ```
-<dataMatch enable="0" testName="dataMatchInterf" testFuncName="test_frequencyCorrection_dataMatch" testType="dataMatch" description="check if frequency correction recognises typical cases properly">
-	<testPath findPath="0" testFuncPath="D:\Ratgor\GitRepo\FuncTestCopy\ComputeFramework\FunctionalTesting\testsLib\frequencyCorrection\dataMatch\test_frequencyCorrection_dataMatch.m" description="path to the test"/>
-	<inputData backupIn="1" copyIn="clri, def2, delw, spc1" findPath="0" inPath="\ComputeFramework\FunctionalTesting\testsIn\frequencyCorrection\dataMatchInterf" description="copy to the input of testing object" editConfig="historyEnable, value, 1; frequencyCorrectionEnable, value, 1"/>
-	<outputData copyOut="cpif, cpof" findPath="0" outPath="\ComputeFramework\FunctionalTesting\testsOut\frequencyCorrectionDataMatch" description="compare with output of testing object" datamatch_fields="//*[self::frequencyCorrector]/@estimatedFrequency | /equipment/frequencyCorrector/status/@value" datamatch_tolerance="0.1"/>
+<dataMatch enable="0" taskType="dataMatch" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="check if frequency correction recognises typical cases properly">
+	<inputData copyIn="clri, def2, delw, spc1" inPath="\ComputeFramework\FunctionalTesting\testsIn\frequencyCorrection\dataMatchInterf" description="copy to the input of testing object" editConfig="historyEnable, value, 1; frequencyCorrectionEnable, value, 1"/>
+	<outputData copyOut="cpif, cpof" outPath="\ComputeFramework\FunctionalTesting\testsOut\frequencyCorrectionDataMatch" description="compare with output of testing object" datamatch_fields="//*[self::frequencyCorrector]/@estimatedFrequency | /equipment/frequencyCorrector/status/@value" datamatch_tolerance="0.1"/>
 </dataMatch>	
 ```
-Figure 3.5.1. -  Example usage of a task with *testType*=`dataMatch` in testingConfigPy.xml
+Figure 3.5.1. -  Example usage of a task with *taskType*=`dataMatch` in testingConfigPy.xml
 
 &nbsp;
 
-Table 3.5.1. - description of additional fields in a task with *testType*=`dataMatch`
+Table 3.5.1. - description of additional fields in a task with *taskType*=`dataMatch`
 
 | Name of the field                                  | Description                                                          |
 |----------------------------------------------------|----------------------------------------------------------------------|
@@ -355,13 +346,12 @@ Table 3.5.1. - description of additional fields in a task with *testType*=`dataM
 ### <a name="creationHistory">3.6. creationHistory</a>
 
 ```
-<creationHistory enable="0" testName="runabilityFull" testFuncName="test_creatingHistoryFiles_runabilityFull" testType="creationHistory" description="">
-	<testPath testFuncPath="\ComputeFramework\FunctionalTesting\testsLib\creatingHistoryFiles\runabilityFull\test_creatingHistoryFiles_runabilityFull.m" description="path to the test"/>
-	<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles" description="copy to the input of testing object" editConfig="historyEnable, value, 1; printPlotsEnable, value, 1; equipmentStateDetectionEnable, value, 1; shaftDisplacementEnable, value, 1; frequencyCorrectionEnable, value, 1; frequencyDomainClassifierEnable, value, 1; timeDomainClassifierEnable, value, 1; timeFrequencyDomainClassifierEnable, value, 1; metricsEnable, value, 1; spmEnable, value, 1; iso15242Enable, value, 1; iso10816Enable, value, 1; iso7919Enable, value, 1; octaveSpectrumEnable, value, 1; decisionMakerEnable, value, 1"/>
+<creationHistory enable="0" taskType="creationHistory" taskPath="\ComputeFramework\Classifier\runProcessing.m" description="">
+	<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\creatingHistoryFiles" description="copy to the input of testing object" editConfig="historyEnable, value, 1; printPlotsEnable, value, 1; equipmentStateDetectionEnable, value, 1"/>
 	<outputData copyOut="cpif, cpof" outPath="" description="compare with output of testing object" findInLog="'[Framework] Framework processing. \n @status.xml file was successfully updated by history.', '[Framework] History processing. \n History processing COMPLETE.'"/>
 </creationHistory>
 ```
-Figure 3.6.1. - Example usage of a task with *testType*=`creationHistory` in testingConfigPy.xml
+Figure 3.6.1. - Example usage of a task with *taskType*=`creationHistory` in testingConfigPy.xml
 
 &nbsp;
 
@@ -369,44 +359,44 @@ Figure 3.6.1. - Example usage of a task with *testType*=`creationHistory` in tes
 
 Tasks of type `generateTests` have few essential characteristics.
 1. Earlier it [was said](#taskGroups) that task's execution is possible even without presence of **\<taskGroups/>** or without presence of a task in **\<taskGroups/>**. Unfortunately it isn't possible for tasks of type `generateTests` yet. For successful execution of tasks of this type there must be an element representing the task in the **\<taskGroups/>** section and it must have the `generate` attribute.
-2. Its sctructure slightly differs from general testing task (because technically its not a single task, but rather a compound one). There are 2 variations of this task: before tests generation and after (figures 3.7.1 and 3.7.2 respectively).
+2. Its structure slightly differs from general testing task (because technically its not a single task, but rather a compound one). There are 2 variations of this task: before tests generation and after (figures 3.7.1 and 3.7.2 respectively). Items from the figure 3.7.2 which doesn't present in the figure 3.7.1 are created during tests generation. Values of attributes such as *datamatch\_fields* and *datamatch\_tolerance* aren't filled automatically during tests generation - they have to be filled manually thereafter.
 3. To generate tests the flag *generate* of the task's element in **\<taskGroups/>** should be set to `1` (like for `highSpeedBearing` in fig. 2.1.).
-3. Tests generation includes history creation as well (i.e. when a task is executed with *generate*="`1`" history is created). After tests have been generated there might be need for history creation only. For this case *generateHistory*="`1`" is used.
-
+3. Tests generation includes history creation as well (i.e. when a task is executed with *generate*="`1`" history is created). After tests have been generated there might be need for history creation only. For this case *generateHistory*="`1`" is used. However, it is acceptable to run a task with *generate*="`1`" when tests already exist - this will not lead to purging values of such fields as *datamatch\_fields* and *datamatch\_tolerance* or other negative consequences.
 ```
-<generateTests enable="0" testType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" description=""> 
+<generateTests enable="0" taskType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" taskPath="\ComputeFramework\Classifier\runProcessing.m" description=""> 
 	<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;" generateTests="SSR: datamatchHistory; SST: datamatchHistory; BPR: datamatchHistory; Periodicities"/>
 	<outputData copyOut="cpif, cpof" outPath=""/>
 </generateTests>	
 ```
-Figure 3.7.1. - Example usage of a task with *testType*=`generateTests` before tests generation in testingConfigPy.xml
+Figure 3.7.1. - Example usage of a task with *taskType*=`generateTests` before tests generation in testingConfigPy.xml
 
 &nbsp;
 
 ```
-<generateTests enable="0" testType="generateTests" generateHistory="1" frameworkVersion="v3.3.1" description=""> 
-	<inputData copyIn="sftp, 2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; frequencyCorrectionEnable, value, 1;; frequencyTrackingEnable, value, 1;; bearingsParametersRefinement, value, 1;; evaluation/frequencyTracking, maxPercentDeviation, 6;; evaluation/frequencyTracking, maxPercentDeviationPerSec, 1;; evaluation/frequencyTracking, method, spectrogram;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;;" />
+<generateTests enable="0" taskType="generateTests" generateHistory="0" frameworkVersion="v3.3.1" taskPath="\ComputeFramework\Classifier\runProcessing.m" description=""> 
+	<inputData copyIn="2" inPath="\ComputeFramework\FunctionalTesting\testsIn\highSpeedBearingHistoryDatamatch" editConfig="historyEnable, value, 1;; evaluation/frequencyTracking/spectrogramTracker, type, acc;; evaluation/frequencyTracking/spectrogramTracker/accTracker, frequencyRange, 128:512; 256:1024; 512:2048;; evaluation/frequencyTracking/spectrogramTracker/envTracker, frequencyRange, 8:32; 8:32; 16:64; 32:128; 64:256;; evaluation/frequencyTracking/logSpectrogram, secPerFrame, 0.4;; evaluation/frequencyTracking/logSpectrogram, secOverlap, 0.3;; evaluation/frequencyCorrector/spectralBeamEstimator/validationFrames, logRange, 6 9 14;; evaluation/frequencyCorrector/displacementInterferenceEstimator/validationFrames, minPeakHeight, 6" generateTests="SSR: datamatchHistory; SST: datamatchHistory; BPR: datamatchHistory; Periodicities: datamatchHistory"/>
 	<outputData copyOut="cpif, cpof" outPath=""/>
-	<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" testType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
-	<SST_datamatchHistory enable="1" testType="datamatchHistory" description="" datamatch_fields="//frequencyTracking/informativeTags/type/@value | //frequencyTracking/informativeTags/method/@value | //frequencyTracking/informativeTags/min/@value | //frequencyTracking/informativeTags/max/@value | //frequencyTracking/informativeTags/peak2peak/@value | //frequencyTracking/informativeTags/mean/@value | //frequencyTracking/informativeTags/std/@value | //frequencyTracking/informativeTags/median/@value" datamatch_tolerance="//frequencyTracking/@accuracyPercent" testName="SST_datamatchHistory"/>
-	<BPR_datamatchHistory enable="1" testType="datamatchHistory" description="" datamatch_fields="//bearingsParametersRefinement/informativeTags/bearing/@bd | //bearingsParametersRefinement/informativeTags/bearing/@deviation" datamatch_tolerance="//bearingsParametersRefinement/ballDiameter/@percentStep" testName="BPR_datamatchHistory"/>
-	<Periodicities_datamatchHistory enable="0" testType="datamatchHistory" description="" datamatch_fields="" datamatch_tolerance="" testName="Periodicities_datamatchHistory"/>
+	<SSR_datamatchHistory enable="1" testName="SSR_datamatchHistory" taskType="datamatchHistory" description="SSR=???" datamatch_fields="//frequencyCorrector/informativeTags/estimatedFrequency/@value | //frequencyCorrector/informativeTags/initialFrequency/@value" datamatch_tolerance="//frequencyCorrector/displacementInterferenceEstimator/rough/@percentStep | //frequencyCorrector/interferenceFrequencyEstimator/rough/@percentStep"/>
+	<SST_datamatchHistory enable="1" taskType="datamatchHistory" description="" datamatch_fields="//frequencyTracking/informativeTags/type/@value | //frequencyTracking/informativeTags/method/@value | //frequencyTracking/informativeTags/min/@value" datamatch_tolerance="//frequencyTracking/@accuracyPercent" testName="SST_datamatchHistory"/>
+	<BPR_datamatchHistory enable="1" taskType="datamatchHistory" description="" datamatch_fields="//bearingsParametersRefinement/informativeTags/bearing/@bd | //bearingsParametersRefinement/informativeTags/bearing/@deviation" datamatch_tolerance="//bearingsParametersRefinement/ballDiameter/@percentStep" testName="BPR_datamatchHistory"/>
+	<Periodicities_datamatchHistory enable="0" taskType="datamatchHistory" description="" datamatch_fields="" datamatch_tolerance="" testName="Periodicities_datamatchHistory"/>
 </generateTests>	
 ```
-Figure 3.7.2. - Example usage of a task with *testType*=`generateTests` after tests generation in testingConfigPy.xml
+Figure 3.7.2. - Example usage of a task with *taskType*=`generateTests` after tests generation in testingConfigPy.xml
 
 &nbsp;
 
-Table 3.7.1. - description of additional fields in a task with *testType*=`generateTests`
+Table 3.7.1. - description of additional fields in a task with *taskType*=`generateTests`
 
 | Name of the field                   | Description                                                          |
 |-------------------------------------|----------------------------------------------------------------------|
 | **\<inputData/>**                   |  |
-| &nbsp;&nbsp;*copyIn*                | *copyIn*="`sftp, 2`" is used by default. |
-| &nbsp;&nbsp;*generateTests*         | Defines methods and tests types to generate. It is written in the following format: *generateTests*="`Method: testType`". In the case of multiple tests "; " is used to separate entries: *generateTests*="`Method1: testType1; Method2: testType2.`". |
+| &nbsp;&nbsp;*copyIn*                | *copyIn*="`2`" is used by default. |
+| &nbsp;&nbsp;*generateTests*         | Defines methods and tests types to generate. It is written in the following format: *generateTests*="`Method: taskType`". In the case of multiple tests "; " is used to separate entries: *generateTests*="`Method1: taskType1; Method2: taskType2.`". |
 | &nbsp;&nbsp;*generateHistory*       | Enables/disables (`1`/`0`) history generation. |
 | &nbsp;&nbsp;*frameworkVersion*      | Used to fetch from sftp 'equipmentProfile.xml' for specified version. Example usage: *frameworkVersion*="`v3.3.1`". In newer Framework's versions equipmentProfile.xml is stored at '\ComputeFramework\Equipment\\_dataset\_\taskTag', where `taskTag` is a placeholder for a task's element tag (e.g. if a task's element tag is `highSpeedBearing`, then 'equipmentProfile.xml' should be taken from '\ComputeFramework\Equipment\\_dataset\_\highSpeedBearing')
-| &nbsp;&nbsp;**\<method_testType/>** | Sub-element representing generated test (e.g. **\<SSR\_datamatchHistory/>** in the Fig. 3.7.2.). It has the following attributes: *enable*, *testType*, *description*, *testName*, *datamatch\_fields*, *datamatch\_tolerance*. Writing format of *datamatch\_fields* and *datamatch\_tolerance* is the same as for tasks of [`datamatch`](#dataMatch) type.  |
+| &nbsp;&nbsp;**\<method_taskType/>** | Sub-element representing generated test (e.g. **\<SSR\_datamatchHistory/>** in the Fig. 3.7.2.). It has the following attributes: *enable*, *taskType*, *description*, *datamatch\_fields*, *datamatch\_tolerance*. Writing format of *datamatch\_fields* and *datamatch\_tolerance* is the same as for tasks of [`datamatch`](#dataMatch) type.  |
+| &nbsp;&nbsp;&nbsp;&nbsp;*testName* | Used to check whether tests have been generated. |
 
 &nbsp;
 
@@ -414,35 +404,54 @@ Table 3.7.1. - description of additional fields in a task with *testType*=`gener
 
 ### <a name="taskGroupsExample1">Example 1. taskGroups: re-specifiying attributes' values </a>
 
-Assume we have the following simplified\* xml-snippet (\* - here and further in examples some required elements/attributes are omitted for simplicity):
+Assume we have the following simplified\* xml-snippet (\* - here and further in examples some required elements/attributes of the testing config are omitted for simplicity):
 ```
+<taskGroups>
+	<someTask objectPath="\ComputeFramework\Classifier\ComputeFramework.Win\for_redistribution_files_only\ComputeFramework.exe" />
+</taskGroups>
+
+<someTask objectPath="\ComputeFramework\Classifier\runProcessing.m" />
+```
+In the example above the attribute `objectPath` of the task `someTask` will have the value specified in `./taskGroups/someTask/@objectPath` (i.e. "`\ComputeFramework\Classifier\ComputeFramework.Win\for_redistribution_files_only\ComputeFramework.exe`").
+
+&nbsp;
+
+### <a name="enablesExample">Example 2. Resolving *enable*s </a>
+
+Assume we have the following simplified xml-snippet:
+```
+<generalSettings>
+	<keyPhrase enable="0" taskType="keyPhrase" />
+</generalSettings>
+
 <taskGroups>
 	<outerTask>
 		<innerTask enable="1" />
 	</outerTask>
 </taskGroups>
 
-<outerTask enable="1" testType="taskGroup">
-	<innerTask enable="0" />
+<outerTask enable="1" taskType="taskGroup">
+	<innerTask1 enable="0" />
+	<innerTask2 taskType="keyPhrase"/>
 </outerTask>
-
 ```
-In this example the task `./outerTask/innerTask` will be executed because of:
+In this example the task `./outerTask/innerTask1` will be executed (i.e. *enable*="`1`") and `./outerTask/innerTask1` won't (i.e. *enable*="`0`") because of:
 1) the element `./taskGroups/outerTask` does not have an `enable` attribute, so `./outerTask/@enable`'s value is used;
-2) `./taskGroups/outerTask/innerTask` has an `enable` attribute, whose value is used instead of `./outerTask/innerTask`'s one.
+2) `./taskGroups/outerTask/innerTask` has an `enable` attribute, whose value is used instead of `./outerTask/innerTask`'s one;
+3) `./outerTask/innerTask2` has neither an `enable` attribute nor its corresponding element in **\<taskGroups/>**, so `./generalSettings/keyPhrase/@enable` is used (the latter is always set to `0` by default).
 
 &nbsp;
 
-### <a name="inheritanceExample">Example 2. Inheritance</a>
+### <a name="inheritanceExample">Example 3. Inheritance</a>
 
-The following xml-snippet illustrates an example usage of inheritance when specifiyng value of *testType*:
+The following xml-snippet illustrates an example usage of inheritance when specifiyng value of *taskType*:
 ```
-<parentTask enable="1" testType="keyPhrase">
+<parentTask enable="1" taskType="keyPhrase">
 	<inputData copyIn="def2"/>
 	<outputData copyOut="cpif, cpof" findInLog="'Code: I086'"/>
 </parentTask>
 
-<inheritedTask enable="0" testType="inherit(parentTask)">
+<inheritedTask enable="0" taskType="inherit(parentTask)">
 	<outputData findInLog="'Code: I087'" />
 </inheritedTask>
 ```
@@ -450,7 +459,7 @@ The following xml-snippet illustrates an example usage of inheritance when speci
 In the example above `inhertitedTask` inherits all the items of `parentTask` with overriding those specified explicitly.<br/><br/>
 Technically, `inheritedTask` has the following structure:
 ```
-<inheritedTask enable="0" testType="keyPhrase">
+<inheritedTask enable="0" taskType="keyPhrase">
 	<inputData copyIn="def2"/>
 	<outputData copyOut="cpif, cpof" findInLog="'Code: I087'" />
 </inheritedTask>
@@ -458,7 +467,7 @@ Technically, `inheritedTask` has the following structure:
 
 &nbsp;
 
-### <a name="sftpSyncExample1">Example 3. sftpSync usage</a>
+### <a name="sftpSyncExample1">Example 4. sftpSync usage</a>
 
 Let's assume we have the following file structure on the remote:
 ```
@@ -473,7 +482,7 @@ root/
 ```
 and the following [`sftpSync`](#sftpSync) task:
 ```
-<exampleTask enable="1" testType="sftpSync">
+<exampleTask enable="1" taskType="sftpSync">
 	<localPath path="\baseFolder\ftpTemp" exclude="\baseFolder\ftpTemp\folder1\fileToIgnoreLocally.ext"/>
 	<remotePath include="/root/folder1, /root/someFolder/folder2" exclude="/root/someFolder/folder2/fileToIgnoreRemotely.ext"/>
 	<options deletePresentOnlyLocally="0" updateRemote="0" preLocalCopying="0" postLocalCopying="0"/>
