@@ -1,2 +1,2 @@
-[rel](./Specification&nbsp;on&nbsp;testingConfigPy.xml.md)<br/>
-[abs](Specification&nbsp;on&nbsp;testingConfigPy.xml.md)
+[rel](./Specification%2C+on%2C+testingConfigPy.xml.md)<br/>
+[abs](Specification%2C+on%2C+testingConfigPy.xml.md)
